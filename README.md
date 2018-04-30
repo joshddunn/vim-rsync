@@ -13,19 +13,22 @@ Then add the following line to your config.
 ## Usage
 
 ```vim
-let g:vim_rsync_data = {
+let g:vim_rsync = {
 \ "remote": {
 \   "project_name": {
 \     "user": "root",
 \     "ip_address": "xx.xx.xx",
-\     "local_directory": "",
-\     "remote_directory": "",
+\     "local_directory": "/local/dir/",
+\     "remote_directory": "/remote/dir/",
 \     "exclude": [
+\       "dir/to/ignore"
 \     ]
 \   },
 \ }
 \}
 ```
+
+If your vim setup is public, it's recommended you store `g:vim_rsync` in a file that is ignored by git.
 
 Only exclude is optional.
 

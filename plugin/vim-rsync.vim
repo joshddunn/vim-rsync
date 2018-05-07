@@ -9,24 +9,24 @@ function! RsyncExclude(project)
     return ""
 endfunction
 
-function!RsyncValidate(project)
+function! RsyncValidate(project, project_name)
   if !has_key(a:project, "user")
-    echoerr "The field 'user' in g:vim_rsync cannot be empty"
+    echoerr "The field 'user' in g:vim_rsync['" . a:project_name . "'] cannot be empty"
     return 0
   endif
 
   if !has_key(a:project, "ip_address")
-    echoerr "The field 'ip_address' in g:vim_rsync cannot be empty"
+    echoerr "The field 'ip_address' in g:vim_rsync['" . a:project_name . "'] cannot be empty"
     return 0
   endif
 
   if !has_key(a:project, "local_directory")
-    echoerr "The field 'local_directory' in g:vim_rsync cannot be empty"
+    echoerr "The field 'local_directory' in g:vim_rsync['" . a:project_name . "'] cannot be empty"
     return 0
   endif
 
   if !has_key(a:project, "remote_directory")
-    echoerr "The field 'remote_directory' in g:vim_rsync cannot be empty"
+    echoerr "The field 'remote_directory' in g:vim_rsync['" . a:project_name . "'] cannot be empty"
     return 0
   endif
 
@@ -36,7 +36,7 @@ endfunction
 function! RsyncPush(args)
   if has_key(g:vim_rsync, a:args)
     let project = g:vim_rsync[a:args]
-    if RsyncValidate(project)
+    if RsyncValidate(project, a:args)
       exe "!rsync -r --delete " . RsyncExclude(project) . " " . project["local_directory"] . " " . project["user"] . "@" . project["ip_address"] . ":" . project["remote_directory"]
     endif
   else

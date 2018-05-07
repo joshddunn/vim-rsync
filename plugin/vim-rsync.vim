@@ -4,7 +4,7 @@ endif
 
 function! RsyncExclude(project)
     if has_key(a:project, "exclude")
-      return join(map(a:project["exclude"], "\"--exclude=\'\" . v:val . \"'\""), ' ')
+      return join(map(deepcopy(a:project["exclude"]), "\"--exclude=\'\" . v:val . \"'\""), ' ')
     endif
     return ""
 endfunction
@@ -47,7 +47,7 @@ endfunction
 function! RsyncPull(args)
   if has_key(g:vim_rsync, a:args)
     let project = g:vim_rsync[a:args]
-    if RsyncValidate(project)
+    if RsyncValidate(project, a:args)
       exe "!rsync -r --delete " . RsyncExclude(project) . " " . project["user"] . "@" . project["ip_address"] . ":" . project["remote_directory"] . " " . project["local_directory"]
     endif
   else

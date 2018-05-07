@@ -17,7 +17,7 @@ function! RsyncPush(args)
   if has_key(g:vim_rsync, a:args)
     let project = g:vim_rsync[a:args]
     let exclude = RsyncExclude(project)
-    exe "!rsync -r --delete " .  . project["local_directory"] . " " . project["user"] . "@" . project["ip_address"] . ":" . project["remote_directory"]
+    exe "!rsync -r --delete " . exclude . project["local_directory"] . " " . project["user"] . "@" . project["ip_address"] . ":" . project["remote_directory"]
   else
     echo "The project is not defined in vim_rsync"
   endif

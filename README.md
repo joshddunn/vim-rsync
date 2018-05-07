@@ -14,17 +14,15 @@ Then add the following line to your config.
 
 ```vim
 let g:vim_rsync = {
-\ "remote": {
-\   "project_name": {
-\     "user": "root",
-\     "ip_address": "xx.xx.xx",
-\     "local_directory": "/local/dir/",
-\     "remote_directory": "/remote/dir/",
-\     "exclude": [
-\       "dir/to/ignore"
-\     ]
-\   },
-\ }
+\  "project_name": {
+\    "user": "root",
+\    "ip_address": "xx.xx.xx",
+\    "local_directory": "/local/dir/",
+\    "remote_directory": "/remote/dir/",
+\    "exclude": [
+\      "dir/to/ignore"
+\    ]
+\  }
 \}
 ```
 
